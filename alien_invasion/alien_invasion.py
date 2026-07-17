@@ -33,6 +33,12 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+            
+            #Get rid of bullets that have disappeared.
+            self._update_bullets()
+            print(len(self.bullets))  # Print the number of bullets currently on the screen
+            
+            
             self._update_screen()
             self.clock.tick(60)  # Limit the frame rate to 60 FPS
             
@@ -67,11 +73,23 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
             
-            
+    
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets."""
+        # Update bullet positions.
+        self.bullets.update()
+        
+        # Get rid of bullets that have disappeared.
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+                
+                
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
             
     #function to update the screen during each pass through the loop. It fills the screen with the background color, draws the ship, 
     # and then flips to the new screen.
