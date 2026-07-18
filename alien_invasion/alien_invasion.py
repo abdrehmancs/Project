@@ -1,9 +1,7 @@
 import pygame
-
 import sys
 
 from settings import settings
-
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -25,6 +23,9 @@ class AlienInvasion:
         
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+        
+        self._create_fleet()
 
 
         
@@ -34,6 +35,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+            self.aliens.update()
             
             #Get rid of bullets that have disappeared.
             self._update_bullets()
@@ -101,9 +103,47 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.blitme()
+        self.aliens.draw(self.screen)
                 
         #make the most recently drawn screen visible.
-        pygame.display.flip()     
+        pygame.display.flip()
+        
+        
+        
+    def _create_fleet(self):
+        """create the fleet of aliens."""
+        #create an alien and keep adding untill there is no room left
+        #spacing between the alien is one width length and one alien height
+        #make an alien.
+        alien = Alien(self)
+        alien_width, alien_height = alien.rect.width, alien.rect.height
+        
+        current_x, current_y = alien_width, alien_height
+        while current_y < (self.settings.screen_height - 3 * alien_height):
+            while current_x < (self.settings.screen_width - 2 * alien_width):
+                self._create_alien(current_x, current_y)
+                current_x += 2 * alien_width
+                
+            # Finished a row; reset x value, and increment y value
+            current_x = alien_width
+            current_y += 2 * alien_height
+
+    def _create_alien(self, x_position, y_position):
+        """Create an alien and place it in the row."""
+        alien = Alien(self)
+        alien.x = x_position
+        alien.rect.x = x_position
+        alien.rect.y = y_position
+        self.aliens.add(alien)
+        
+        
+    def _update_aliens(self):
+        """Update the positions of all aliens in the fleet."""
+        self.aliens.update()
+
+
+        
+        
 if __name__ == '__main__':
     #make a game instance, and run the game.
     ai = AlienInvasion()
