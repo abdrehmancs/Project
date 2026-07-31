@@ -1,47 +1,66 @@
-"""Simple Caesar cipher decrypter.
+# """Simple Caesar cipher decrypter.
 
-Usage: run and input the encrypted sentence and the shift used to encrypt.
-The program will print the decrypted sentence.
-"""
+# Usage: run and input the encrypted sentence and the shift used to encrypt.
+# The program will print the decrypted sentence.
+# """
 
-import sys
-
-
-def decrypt_caesar(text: str, shift: int) -> str:
-    """Decrypts text encrypted with a Caesar cipher using the given shift.
-
-    Shift is the amount that was used to encrypt; decryption shifts letters
-    backward by that amount (or forward by 26-shift).
-    Non-alphabetic characters are left unchanged. Case is preserved.
-    """
-    result = []
-    shift = shift % 26
-    for ch in text:
-        if 'a' <= ch <= 'z':
-            base = ord('a')
-            result.append(chr((ord(ch) - base - shift) % 26 + base))
-        elif 'A' <= ch <= 'Z':
-            base = ord('A')
-            result.append(chr((ord(ch) - base - shift) % 26 + base))
-        else:
-            result.append(ch)
-    return ''.join(result)
+# import sys
 
 
-def main():
-    try:
-        encrypted = input("Encrypted sentence: ")
-        raw_shift = input("Shift (integer): ")
-        shift = int(raw_shift.strip())
-    except (EOFError, KeyboardInterrupt):
-        sys.exit(0)
-    except Exception:
-        print("Invalid shift. Please provide an integer.")
-        sys.exit(1)
+# def decrypt_caesar(text: str, shift: int) -> str:
+#     """Decrypts text encrypted with a Caesar cipher using the given shift.
 
-    decrypted = decrypt_caesar(encrypted, shift)
-    print("Decrypted:", decrypted)
+#     Shift is the amount that was used to encrypt; decryption shifts letters
+#     backward by that amount (or forward by 26-shift).
+#     Non-alphabetic characters are left unchanged. Case is preserved.
+#     """
+#     result = []
+#     shift = shift % 26
+#     for ch in text:
+#         if 'a' <= ch <= 'z':
+#             base = ord('a')
+#             result.append(chr((ord(ch) - base - shift) % 26 + base))
+#         elif 'A' <= ch <= 'Z':
+#             base = ord('A')
+#             result.append(chr((ord(ch) - base - shift) % 26 + base))
+#         else:
+#             result.append(ch)
+#     return ''.join(result)
 
 
-if __name__ == '__main__':
-    main()
+# def main():
+#     try:
+#         encrypted = input("Encrypted sentence: ")
+#         raw_shift = input("Shift (integer): ")
+#         shift = int(raw_shift.strip())
+#     except (EOFError, KeyboardInterrupt):
+#         sys.exit(0)
+#     except Exception:
+#         print("Invalid shift. Please provide an integer.")
+#         sys.exit(1)
+
+#     decrypted = decrypt_caesar(encrypted, shift)
+#     print("Decrypted:", decrypted)
+
+
+# if __name__ == '__main__':
+#     main()
+
+
+list_alpha = ['A','B','C','D','E','F','G','H','I',"J",'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+
+for i in range(len(list_alpha)):
+    print(i, list_alpha[i])
+    
+    
+    
+original_text = input("Enter the text to be ciphered: ").replace(" ", "").upper()
+
+cipher_text = ""
+for char in original_text:
+    if char in list_alpha:
+        index = list_alpha.index(char)
+        cipher_index = (index + 3) % len(list_alpha)
+        cipher_text += list_alpha[cipher_index]
+
+print("Ciphered text:", cipher_text)
