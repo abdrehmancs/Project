@@ -1,15 +1,12 @@
-students = []
+from PIL import Image
 
-with open("students.csv") as file:
-    for line in file:
-        name, house = line.strip().split(",")
-        student = {"name": name, "house":house}
-        students.append(student)
-        
-        
-def get_student(student):
-    return student["name"]
-
-
-for student in sorted(students,key = get_student):
-    print(f"{student['name']} is in {student['house']}")
+def main():
+    Img = Image.open("Profile Pic.png")
+    
+    crop_box = (0,0,500,500)
+    cropped_image = Img.crop(crop_box)
+    cropped_image.show()
+    Img.close()
+    
+    
+main()
