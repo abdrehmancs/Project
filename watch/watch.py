@@ -1,8 +1,6 @@
 import re
 
-link = input("Enter your link: ").strip()
+um = input("Enter your text: ").strip()
 
-pattern = r"src=(.*?)"
 
-if matches := re.search(pattern, link):
-    print("Valid YouTube embed link")
+print(len(re.findall(r"um", um)))
