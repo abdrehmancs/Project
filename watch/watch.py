@@ -21,5 +21,7 @@ class House:
         
 def main():
     student = House()
+    print("Running the program...")
+
 
 main()
