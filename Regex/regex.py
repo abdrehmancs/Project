@@ -9,4 +9,4 @@ if matches := re.search(r"^(\d+)\.(\d+).(\d+)\.(\d+)$",ip):
     ip_4 = int(ip_4)
     for part in matches.groups():
         if int(part) < 255:
-            print("hh")
+            print("We are graet")
