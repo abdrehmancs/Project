@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Engineer Portfolio | AI Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #050d1a; /* Darker, richer navy */
+            --bg-navy: #0a192f;
+            --accent-cyan: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.4);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: #e6f1ff;
+            margin: 0;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        .mono { font-family: 'Fira Code', monospace; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-cyan);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+        }
+        .cyan-glow {
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .glow-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            opacity: 0.6;
+        }
+        .text-glow {
+            text-shadow: 0 0 15px var(--accent-glow);
+        }
+        .nav-link.active {
+            color: var(--accent-cyan);
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        /* Enhanced Background Animations */
+        .blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+            filter: blur(60px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 30s infinite alternate ease-in-out;
+        }
+        .blob-2 {
+            background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%);
+            width: 700px;
+            height: 700px;
+            animation-delay: -10s;
+            animation-duration: 35s;
+        }
+        @keyframes float {
+            0% { transform: translate(-10%, -10%) scale(1); }
+            100% { transform: translate(20%, 20%) scale(1.2); }
+        }
+
+        .modal-overlay {
+            background: rgba(5, 13, 26, 0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        #custom-cursor {
+            width: 16px;
+            height: 16px;
+            background: rgba(6, 182, 212, 0.6);
+            border: 1px solid #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease-out, background 0.3s ease, width 0.3s ease, height 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-hover {
+            transform: translate(-50%, -50%) scale(2.5) !important;
+            background: rgba(6, 182, 212, 0.2) !important;
+            border-color: var(--accent-cyan) !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="custom-cursor"></div>
+
+    <div class="blob top-[-10%] left-[-10%]"></div>
+    <div class="blob blob-2 bottom-[-10%] right-[-10%]"></div>
+
+    <nav id="navbar" class="fixed w-full z-50 px-8 py-5 flex justify-between items-center backdrop-blur-lg border-b border-white/5 transition-all duration-500">
+        <div class="text-2xl font-bold text-cyan-400 tracking-tighter flex items-center gap-2">
+            <div class="w-3 h-3 bg-cyan-500 rounded-full animate-pulse"></div>
+            ML.PORTFOLIO
+        </div>
+        <div class="space-x-10 hidden md:flex text-sm font-medium text-slate-400">
+            <a href="#about" class="nav-link transition-all duration-300 hover:text-cyan-400">About</a>
+            <a href="#skills" class="nav-link transition-all duration-300 hover:text-cyan-400">Skills</a>
+            <a href="#experience" class="nav-link transition-all duration-300 hover:text-cyan-400">Experience</a>
+            <a href="#projects" class="nav-link transition-all duration-300 hover:text-cyan-400">Projects</a>
+            <a href="#contact" class="nav-link transition-all duration-300 hover:text-cyan-400">Contact</a>
+        </div>
+    </nav>
+
+    <section id="about" class="relative pt-32 pb-20 px-6 flex flex-col items-center justify-center text-center min-h-screen">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[150px] -z-10"></div>
+
+        <h1 data-aos="fade-up" class="text-6xl md:text-8xl font-bold mb-8 leading-tight tracking-tight">
+            Engineering the <span class="text-cyan-400 text-glow">Intelligence</span> <br> of Tomorrow
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="100" class="text-slate-400 text-lg md:text-2xl max-w-3xl mb-12 leading-relaxed font-light">
+            Machine Learning Engineer specializing in <span class="text-slate-200">Deep Learning</span>, <span class="text-slate-200">Neural Architectures</span>, and <span class="text-slate-200">Scalable AI</span>. Turning noise into intelligence.
+        </p>
+
+        <div data-aos="fade-up" data-aos-delay="200" class="flex gap-6">
+            <a href="#projects" class="px-10 py-4 bg-cyan-500 text-slate-900 font-bold rounded-xl cyan-glow hover:bg-cyan-400 transition-all duration-300 hover:scale-105">Explore Projects</a>
+            <a href="#contact" class="px-10 py-4 glass-card rounded-xl font-bold hover:bg-white/10 transition-all duration-300 hover:scale-105">Get In Touch</a>
+        </div>
+
+        <div class="w-full max-w-5xl mt-32">
+            <div class="glow-line"></div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-32 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Technical <span class="text-cyan-400">Arsenal</span></h2>
+            <div class="w-24 h-1.5 bg-cyan-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="glass-card p-10 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="p-3 bg-cyan-500/20 rounded-2xl text-cyan-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707M6.858 18.364l.707-.707M14 10a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">ML & AI</h3>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">PyTorch</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">TensorFlow</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Keras</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Scikit-Learn</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Transformers</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">LLMs</span>
+                </div>
+            </div>
+
+            <div class="glass-card p-10 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="p-3 bg-cyan-500/20 rounded-2xl text-cyan-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">Data Engine</h3>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Pandas</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">NumPy</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">SQL</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Spark</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">MongoDB</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Redis</span>
+                </div>
+            </div>
+
+            <div class="glass-card p-10 rounded-3xl" data-aos="fade-up" data-aos-delay="300">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="p-3 bg-cyan-500/20 rounded-2xl text-cyan-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h-14" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold">Infrastructure</h3>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Docker</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Kubernetes</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">AWS</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">GCP</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">FastAPI</span>
+                    <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs hover:border-cyan-400 transition cursor-default text-slate-300">Git</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-32 px-6 max-w-4xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Professional <span class="text-cyan-400">Journey</span></h2>
+            <div class="w-24 h-1.5 bg-cyan-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="relative border-l-2 border-cyan-500/20 ml-4 md:ml-0 pl-10 space-y-16">
+            <div class="relative" data-aos="fade-left">
+                <div class="absolute -left-[49px] top-1 w-4 h-4 bg-cyan-500 rounded-full cyan-glow"></div>
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                        <h3 class="text-2xl font-bold text-white">Senior ML Engineer</h3>
+                        <span class="mono text-xs font-medium text-cyan-400 bg-cyan-500/10 px-4 py-1 rounded-full border border-cyan-500/20">2022 — Present</span>
+                    </div>
+                    <div class="text-slate-300 font-semibold mb-3 text-lg">AI Labs Corp</div>
+                    <p class="text-slate-400 text-base leading-relaxed">
+                        Leading the development of large-scale transformer models. Optimized inference latency by 40% using TensorRT and custom quantization kernels.
+                    </p>
+                </div>
+            </div>
+
+            <div class="relative" data-aos="fade-left" data-aos-delay="100">
+                <div class="absolute -left-[49px] top-1 w-4 h-4 bg-cyan-500 rounded-full cyan-glow"></div>
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                        <h3 class="text-2xl font-bold text-white">ML Researcher</h3>
+                        <span class="mono text-xs font-medium text-cyan-400 bg-cyan-500/10 px-4 py-1 rounded-full border border-cyan-500/20">2019 — 2022</span>
+                    </div>
+                    <div class="text-slate-300 font-semibold mb-3 text-lg">DeepMind University</div>
+                    <p class="text-slate-400 text-base leading-relaxed">
+                        Published 3 papers on reinforcement learning for robotics. Developed a new reward shaping algorithm that improved agent convergence speed.
+                    </p>
+                </div>
+            </div>
+
+            <div class="relative" data-aos="fade-left" data-aos-delay="200">
+                <div class="absolute -left-[49px] top-1 w-4 h-4 bg-cyan-500 rounded-full cyan-glow"></div>
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                        <h3 class="text-2xl font-bold text-white">Data Scientist Intern</h3>
+                        <span class="mono text-xs font-medium text-cyan-400 bg-cyan-500/10 px-4 py-1 rounded-full border border-cyan-500/20">2018 — 2019</span>
+                    </div>
+                    <div class="text-slate-300 font-semibold mb-3 text-lg">DataFlow Systems</div>
+                    <p class="text-slate-400 text-base leading-relaxed">
+                        Automated data cleaning pipelines for healthcare datasets using PySpark, reducing preprocessing time from days to hours.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-32 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Featured <span class="text-cyan-400">Projects</span></h2>
+            <div class="w-24 h-1.5 bg-cyan-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('proj1')">
+                <div class="h-48 bg-slate-900 rounded-2xl mb-8 overflow-hidden relative border border-white/5">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent"></div>
+                    <div class="flex items-center justify-center h-full text-slate-600 mono text-xs">Project Visualization</div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">Neural-Net Optimizer</h3>
+                <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed">
+                    Developed a custom optimizer for transformer models that reduces training time by 15% while maintaining accuracy.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">PyTorch</span>
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">Python</span>
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">CUDA</span>
+                </div>
+                <div class="text-cyan-400 text-sm font-bold flex items-center gap-2">
+                    Detailed Case Study <span class="group-hover:translate-x-2 transition-transform">→</span>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('proj2')">
+                <div class="h-48 bg-slate-900 rounded-2xl mb-8 overflow-hidden relative border border-white/5">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent"></div>
+                    <div class="flex items-center justify-center h-full text-slate-600 mono text-xs">Project Visualization</div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">NLP Sentiment Engine</h3>
+                <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed">
+                    A real-time sentiment analysis pipeline processing 10k requests/sec using BERT and FastAPI.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">HuggingFace</span>
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">FastAPI</span>
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">Docker</span>
+                </div>
+                <div class="text-cyan-400 text-sm font-bold flex items-center gap-2">
+                    Detailed Case Study <span class="group-hover:translate-x-2 transition-transform">→</span>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group" data-aos="zoom-in" data-aos-delay="300" onclick="openModal('proj3')">
+                <div class="h-48 bg-slate-900 rounded-2xl mb-8 overflow-hidden relative border border-white/5">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent"></div>
+                    <div class="flex items-center justify-center h-full text-slate-600 mono text-xs">Project Visualization</div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">CV Medical Imaging</h3>
+                <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed">
+                    Using U-Net architectures to automate tumor segmentation in MRI scans with 94% Dice score.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">TensorFlow</span>
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">OpenCV</span>
+                    <span class="text-[10px] px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">Keras</span>
+                </div>
+                <div class="text-cyan-400 text-sm font-bold flex items-center gap-2">
+                    Detailed Case Study <span class="group-hover:translate-x-2 transition-transform">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="project-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-6">
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+        <div class="glass-card relative w-full max-w-2xl p-10 rounded-3xl z-10 transform scale-95 opacity-0 transition-all duration-500" id="modal-content">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition p-2 rounded-full hover:bg-white/10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <section id="contact" class="py-32 px-6 text-center">
+        <div class="glass-card max-w-3xl mx-auto p-12 rounded-3xl" data-aos="fade-up">
+            <h2 class="text-4xl font-bold mb-6">Let's <span class="text-cyan-400">Connect</span></h2>
+            <p class="text-slate-400 mb-12 text-lg font-light">Open for collaborations on SOTA research and AI engineering roles.</p>
+            <div class="max-w-lg mx-auto text-left">
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Message sent! (UI Demo)');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Name</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-cyan-400 focus:outline-none transition text-sm text-white" placeholder="John Doe">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Email</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-cyan-400 focus:outline-none transition text-sm text-white" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Message</label>
+                        <textarea required rows="4" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-cyan-400 focus:outline-none transition text-sm text-white" placeholder="Tell me about your vision..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-cyan-500 text-slate-900 font-bold rounded-xl cyan-glow hover:bg-cyan-400 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+                        Transmit Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 text-center">
+        <div class="flex justify-center gap-6 mb-8">
+            <a href="#" class="text-slate-500 hover:text-cyan-400 transition-colors">GitHub</a>
+            <a href="#" class="text-slate-500 hover:text-cyan-400 transition-colors">LinkedIn</a>
+            <a href="#" class="text-slate-500 hover:text-cyan-400 transition-colors">Twitter</a>
+        </div>
+        <div class="text-slate-600 text-xs mono uppercase tracking-widest">
+            &copy; 2026 ML Engineer Portfolio // Designed for Performance
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        const navbar = document.getElementById('navbar');
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-3', 'bg-[#050d1a]/90');
+                navbar.classList.remove('py-5');
+            } else {
+                navbar.classList.remove('py-3', 'bg-[#050d1a]/90');
+                navbar.classList.add('py-5');
+            }
+
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        const projectData = {
+            proj1: {
+                title: "Neural-Net Optimizer",
+                desc: "SOTA Transformer Convergence Optimization",
+                details: "This project involved creating a modified AdamW optimizer that dynamically adjusts learning rates based on gradient variance across layers. It was tested on Llama-2 and BERT models, showing significant convergence speedups and stability in early training phases.",
+                tech: ["PyTorch", "Python", "CUDA", "Triton"],
+                link: "#"
+            },
+            proj2: {
+                title: "NLP Sentiment Engine",
+                desc: "Ultra-high throughput Real-time Analysis",
+                details: "Built a highly scalable inference pipeline. Implemented request batching and model quantization (INT8) using ONNX Runtime to maximize throughput on T4 GPUs, achieving < 20ms latency for 99th percentile requests.",
+                tech: ["HuggingFace", "FastAPI", "Docker", "Kubernetes"],
+                link: "#"
+            },
+            proj3: {
+                title: "CV Medical Imaging",
+                desc: "Automated MRI Tumor Segmentation",
+                details: "Developed a multi-scale U-Net with attention gates to improve segmentation of small tumor regions. Collaborated with radiologists to validate the ground truth labels, achieving a 94% Dice score across diverse datasets.",
+                tech: ["TensorFlow", "OpenCV", "Keras", "PyDICOM"],
+                link: "#"
+            }
+        };
+
+        function openModal(id) {
+            const project = projectData[id];
+            const body = document.getElementById('modal-body');
+            body.innerHTML = `
+                <h3 class="text-4xl font-bold text-white mb-4">${project.title}</h3>
+                <p class="text-cyan-400 font-medium mb-8 text-lg">${project.desc}</p>
+                <div class="text-slate-300 mb-10 leading-relaxed text-lg">${project.details}</div>
+                <div class="flex flex-wrap gap-3 mb-12">
+                    ${project.tech.map(t => `<span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs mono text-slate-300">${t}</span>`).join('')}
+                </div>
+                <a href="${project.link}" class="px-8 py-4 bg-cyan-500 text-slate-900 font-bold rounded-xl cyan-glow hover:bg-cyan-400 transition-all duration-300 inline-block">
+                    View GitHub Repository
+                </a>
+            `;
+            const modal = document.getElementById('project-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('project-modal');
+            const content = document.getElementById('modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        const cursor = document.getElementById('custom-cursor');
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, .glass-card, input, textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
+    </script>
+</body>
+</html>
