@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Machine learning engineer portfolio featuring production AI systems, research, and selected projects.">
+    <meta name="theme-color" content="#050d1a">
     <title>ML Engineer Portfolio | AI Architect</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -20,8 +22,24 @@
             color: #e6f1ff;
             margin: 0;
             overflow-x: hidden;
-            cursor: none;
         }
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--accent-cyan);
+            outline-offset: 4px;
+        }
+        .skip-link {
+            position: fixed;
+            left: 1rem;
+            top: -4rem;
+            z-index: 1000;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            background: var(--accent-cyan);
+            color: #03111f;
+            font-weight: 700;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus { top: 1rem; }
         .mono { font-family: 'Fira Code', monospace; }
 
         .glass-card {
@@ -82,32 +100,24 @@
             backdrop-filter: blur(12px);
         }
 
-        #custom-cursor {
-            width: 16px;
-            height: 16px;
-            background: rgba(6, 182, 212, 0.6);
-            border: 1px solid #fff;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease-out, background 0.3s ease, width 0.3s ease, height 0.3s ease;
-            transform: translate(-50%, -50%);
-        }
-        .cursor-hover {
-            transform: translate(-50%, -50%) scale(2.5) !important;
-            background: rgba(6, 182, 212, 0.2) !important;
-            border-color: var(--accent-cyan) !important;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body class="min-h-screen">
-    <div id="custom-cursor"></div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     <div class="blob top-[-10%] left-[-10%]"></div>
     <div class="blob blob-2 bottom-[-10%] right-[-10%]"></div>
 
-    <nav id="navbar" class="fixed w-full z-50 px-8 py-5 flex justify-between items-center backdrop-blur-lg border-b border-white/5 transition-all duration-500">
+    <nav id="navbar" class="fixed w-full z-50 px-6 md:px-8 py-5 backdrop-blur-lg border-b border-white/5 transition-all duration-500" aria-label="Primary navigation">
+        <div class="flex justify-between items-center">
         <div class="text-2xl font-bold text-cyan-400 tracking-tighter flex items-center gap-2">
             <div class="w-3 h-3 bg-cyan-500 rounded-full animate-pulse"></div>
             ML.PORTFOLIO
@@ -119,14 +129,29 @@
             <a href="#projects" class="nav-link transition-all duration-300 hover:text-cyan-400">Projects</a>
             <a href="#contact" class="nav-link transition-all duration-300 hover:text-cyan-400">Contact</a>
         </div>
+        <button id="menu-toggle" type="button" class="md:hidden rounded-lg p-2 text-slate-300 hover:bg-white/10" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden pt-4 space-y-2 text-sm font-medium text-slate-300">
+            <a href="#about" class="block rounded-lg px-3 py-2 hover:bg-white/10">About</a>
+            <a href="#skills" class="block rounded-lg px-3 py-2 hover:bg-white/10">Skills</a>
+            <a href="#experience" class="block rounded-lg px-3 py-2 hover:bg-white/10">Experience</a>
+            <a href="#projects" class="block rounded-lg px-3 py-2 hover:bg-white/10">Projects</a>
+            <a href="#contact" class="block rounded-lg px-3 py-2 hover:bg-white/10">Contact</a>
+        </div>
     </nav>
 
+    <main id="main-content">
     <section id="about" class="relative pt-32 pb-20 px-6 flex flex-col items-center justify-center text-center min-h-screen">
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[150px] -z-10"></div>
 
         <h1 data-aos="fade-up" class="text-6xl md:text-8xl font-bold mb-8 leading-tight tracking-tight">
             Engineering the <span class="text-cyan-400 text-glow">Intelligence</span> <br> of Tomorrow
         </h1>
+        <div data-aos="fade-up" class="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-cyan-300">
+            <span class="h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span> Available for meaningful AI work
+        </div>
         <p data-aos="fade-up" data-aos-delay="100" class="text-slate-400 text-lg md:text-2xl max-w-3xl mb-12 leading-relaxed font-light">
             Machine Learning Engineer specializing in <span class="text-slate-200">Deep Learning</span>, <span class="text-slate-200">Neural Architectures</span>, and <span class="text-slate-200">Scalable AI</span>. Turning noise into intelligence.
         </p>
@@ -134,6 +159,11 @@
         <div data-aos="fade-up" data-aos-delay="200" class="flex gap-6">
             <a href="#projects" class="px-10 py-4 bg-cyan-500 text-slate-900 font-bold rounded-xl cyan-glow hover:bg-cyan-400 transition-all duration-300 hover:scale-105">Explore Projects</a>
             <a href="#contact" class="px-10 py-4 glass-card rounded-xl font-bold hover:bg-white/10 transition-all duration-300 hover:scale-105">Get In Touch</a>
+        </div>
+        <div class="mt-16 grid grid-cols-3 gap-8 border-y border-white/10 py-6 text-left" aria-label="Portfolio highlights">
+            <div><div class="text-2xl font-bold text-white">40<span class="text-cyan-400">%</span></div><div class="text-xs text-slate-500">latency reduced</div></div>
+            <div><div class="text-2xl font-bold text-white">10k<span class="text-cyan-400">+</span></div><div class="text-xs text-slate-500">requests / sec</div></div>
+            <div><div class="text-2xl font-bold text-white">3</div><div class="text-xs text-slate-500">research papers</div></div>
         </div>
 
         <div class="w-full max-w-5xl mt-32">
@@ -265,11 +295,11 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <div class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('proj1')">
+            <button type="button" class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group text-left" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('proj1')" aria-label="Open case study for Neural-Net Optimizer">
                 <div class="h-48 bg-slate-900 rounded-2xl mb-8 overflow-hidden relative border border-white/5">
                     <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent"></div>
                     <div class="flex items-center justify-center h-full text-slate-600 mono text-xs">Project Visualization</div>
-                </div>
+                </button>
                 <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">Neural-Net Optimizer</h3>
                 <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed">
                     Developed a custom optimizer for transformer models that reduces training time by 15% while maintaining accuracy.
@@ -284,11 +314,11 @@
                 </div>
             </div>
 
-            <div class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('proj2')">
+            <button type="button" class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group text-left" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('proj2')" aria-label="Open case study for NLP Sentiment Engine">
                 <div class="h-48 bg-slate-900 rounded-2xl mb-8 overflow-hidden relative border border-white/5">
                     <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent"></div>
                     <div class="flex items-center justify-center h-full text-slate-600 mono text-xs">Project Visualization</div>
-                </div>
+                </button>
                 <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">NLP Sentiment Engine</h3>
                 <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed">
                     A real-time sentiment analysis pipeline processing 10k requests/sec using BERT and FastAPI.
@@ -303,11 +333,11 @@
                 </div>
             </div>
 
-            <div class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group" data-aos="zoom-in" data-aos-delay="300" onclick="openModal('proj3')">
+            <button type="button" class="glass-card p-8 rounded-3xl flex flex-col h-full cursor-pointer group text-left" data-aos="zoom-in" data-aos-delay="300" onclick="openModal('proj3')" aria-label="Open case study for CV Medical Imaging">
                 <div class="h-48 bg-slate-900 rounded-2xl mb-8 overflow-hidden relative border border-white/5">
                     <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent"></div>
                     <div class="flex items-center justify-center h-full text-slate-600 mono text-xs">Project Visualization</div>
-                </div>
+                </button>
                 <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">CV Medical Imaging</h3>
                 <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed">
                     Using U-Net architectures to automate tumor segmentation in MRI scans with 94% Dice score.
@@ -324,10 +354,10 @@
         </div>
     </section>
 
-    <div id="project-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-6">
-        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+    <div id="project-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-6" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()" aria-hidden="true"></div>
         <div class="glass-card relative w-full max-w-2xl p-10 rounded-3xl z-10 transform scale-95 opacity-0 transition-all duration-500" id="modal-content">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition p-2 rounded-full hover:bg-white/10">
+            <button id="modal-close" type="button" onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition p-2 rounded-full hover:bg-white/10" aria-label="Close project details">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -341,7 +371,7 @@
             <h2 class="text-4xl font-bold mb-6">Let's <span class="text-cyan-400">Connect</span></h2>
             <p class="text-slate-400 mb-12 text-lg font-light">Open for collaborations on SOTA research and AI engineering roles.</p>
             <div class="max-w-lg mx-auto text-left">
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Message sent! (UI Demo)');">
+                <form id="contact-form" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Name</label>
@@ -357,21 +387,22 @@
                         <textarea required rows="4" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-cyan-400 focus:outline-none transition text-sm text-white" placeholder="Tell me about your vision..."></textarea>
                     </div>
                     <button type="submit" class="w-full py-4 bg-cyan-500 text-slate-900 font-bold rounded-xl cyan-glow hover:bg-cyan-400 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
-                        Transmit Message
+                        Prepare Email
                     </button>
+                    <p id="form-status" class="text-sm text-slate-500" aria-live="polite">This opens your email app with the message prepared.</p>
                 </form>
             </div>
         </div>
     </section>
+    </main>
 
     <footer class="py-16 text-center">
         <div class="flex justify-center gap-6 mb-8">
-            <a href="#" class="text-slate-500 hover:text-cyan-400 transition-colors">GitHub</a>
-            <a href="#" class="text-slate-500 hover:text-cyan-400 transition-colors">LinkedIn</a>
-            <a href="#" class="text-slate-500 hover:text-cyan-400 transition-colors">Twitter</a>
+            <a href="https://github.com/" target="_blank" rel="noreferrer" class="text-slate-500 hover:text-cyan-400 transition-colors">GitHub</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" class="text-slate-500 hover:text-cyan-400 transition-colors">LinkedIn</a>
         </div>
         <div class="text-slate-600 text-xs mono uppercase tracking-widest">
-            &copy; 2026 ML Engineer Portfolio // Designed for Performance
+            &copy; 2026 ML Engineer Portfolio // Built for clarity
         </div>
     </footer>
 
@@ -440,7 +471,7 @@
             const project = projectData[id];
             const body = document.getElementById('modal-body');
             body.innerHTML = `
-                <h3 class="text-4xl font-bold text-white mb-4">${project.title}</h3>
+                <h3 id="modal-title" class="text-4xl font-bold text-white mb-4">${project.title}</h3>
                 <p class="text-cyan-400 font-medium mb-8 text-lg">${project.desc}</p>
                 <div class="text-slate-300 mb-10 leading-relaxed text-lg">${project.details}</div>
                 <div class="flex flex-wrap gap-3 mb-12">
@@ -453,6 +484,8 @@
             const modal = document.getElementById('project-modal');
             const content = document.getElementById('modal-content');
             modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            document.getElementById('modal-close').focus();
             setTimeout(() => {
                 content.classList.remove('scale-95', 'opacity-0');
                 content.classList.add('scale-100', 'opacity-100');
@@ -466,18 +499,41 @@
             content.classList.add('scale-95', 'opacity-0');
             setTimeout(() => {
                 modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
             }, 300);
         }
 
-        const cursor = document.getElementById('custom-cursor');
-        window.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+            mobileMenu.classList.toggle('hidden', isOpen);
         });
 
-        document.querySelectorAll('a, button, .glass-card, input, textarea').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.setAttribute('aria-label', 'Open navigation menu');
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeModal();
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const name = form.querySelector('input[type="text"]').value.trim();
+            const email = form.querySelector('input[type="email"]').value.trim();
+            const message = form.querySelector('textarea').value.trim();
+            const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+            document.getElementById('form-status').textContent = 'Your email app should open with the message prepared.';
         });
     </script>
 </body>
